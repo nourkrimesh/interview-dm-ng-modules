@@ -1,0 +1,7 @@
+{
+  "name": "interview-dm-ng-modules",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
