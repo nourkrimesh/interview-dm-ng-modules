@@ -25,3 +25,24 @@
 #container a {
   text-decoration: none;
 }
+
+.city-input {
+  font-size: 1.5em;
+  text-decoration: underline;
+}
+
+.current-temp {
+  font-size: 7em;
+}
+
+.days-list {
+  background:#ffffff40;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.day-item {
+  --background: transparent !important;
+  background: transparent !important;
+  font-size: 1em;
+}

@@ -1,20 +1,53 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Blank
+      <ion-input placeholder="Enter City Name" debounce="1000" (ionInput)="getWeatherInfo($event)" [(ngModel)]="city"></ion-input>
     </ion-title>
+    <ion-buttons [collapse]="true" slot="end">
+      <ion-button>
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="secondary">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+    <ion-toolbar color="secondary">
+      <ion-input class="city-input" placeholder="Enter City Name" debounce="1000" [(ngModel)]="city" (ionInput)="getWeatherInfo($event)"></ion-input>
+      <ion-buttons [collapse]="true" slot="end">
+        <ion-button>
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-grid *ngIf="forcast">
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <ion-label class="current-temp">{{forcast?.current?.temp_c}}°</ion-label>
+            <ion-label>{{forcast?.current.condition.text.toUpperCase()}}</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="8" offset="2">
+            <ion-img src="{{'https:'+forcast.current.condition.icon}}"></ion-img>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-list class="days-list" lines="none">
+              <ion-item *ngFor="let day of forcast.forecast.forecastday" class="day-item">
+                <ion-img color="light" [src]="'https:'+day.day.condition.icon" slot="start"></ion-img>
+                <ion-label color="light">{{day.date | date:'cccc'}}</ion-label>
+                <ion-label color="light" slot="end">{{day.day.mintemp_c}}°/{{day.day.maxtemp_c}}°</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
